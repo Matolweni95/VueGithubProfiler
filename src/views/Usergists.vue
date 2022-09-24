@@ -1,21 +1,23 @@
 <template>
-<h1>Gists</h1>
     <div class="container">
+    <h1>Gists</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">No</th>
-          <th scope="col">Discription</th>
-          <th scope="col">id</th>
-          <th scope="col">Updated at</th>
+          <th>id</th>
+          <th class="desc">Discription</th>
+          <th>Created At</th>
+          <th>Updated at</th>
+          <th>Comments</th>
         </tr>
         </thead>
-          <tbody >
+          <tbody>
             <tr v-for="items in gists" :key="items.id">
-                <td>{{i+1}}</td>
-                <td>{{items.description}}</td>
                 <td>{{items.id}}</td>
-                <td>{{items.updated_at}}</td>
+                <td>{{items.description}}</td>
+                <td>{{ formatDate(`${items.created_at}`) }}</td>
+                <td>{{ formatDate(`${items.updated_at}`) }}</td>
+                <td>{{items.comments}}</td>
             </tr>
         </tbody>
       </table> 
@@ -31,6 +33,7 @@
 <script>
 
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 export default {
 name: "userList",
@@ -54,6 +57,12 @@ methods: {
     this.gists = this.Nextpage;
     console.log(this.Nextpage);
     });
+  },
+
+  formatDate(dateString) {
+    const date = dayjs(dateString);
+    // Then specify how you want your dates to be formatted
+    return date.format('MMM D, YYYY h:mm A');
   },
 
   Back(){
@@ -82,3 +91,9 @@ created: function(){
 
 };
 </script>
+
+<style>
+  .desc{
+    width: 300px;
+  }
+</style>

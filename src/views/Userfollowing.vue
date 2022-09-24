@@ -1,12 +1,14 @@
 <template>
-<h1>Following</h1>
      <div class="container">
+     <h1>Following</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">No</th>
-          <th scope="col">Username</th>
-          <th scope="col">Profile Image</th>
+          <th>id</th>
+          <th>Username</th>
+          <th>Profile Image</th>
+          <th>Type</th>
+          <th>Url</th>
         </tr>
         </thead>
         <tbody >
@@ -14,6 +16,8 @@
                 <td>{{items.id}}</td>
                 <td>{{items.login}}</td>
                 <td><img :src ="items.avatar_url"></td>
+                <td>{{items.type}}</td>
+                <td>{{items.html_url}}</td>
             </tr>
         </tbody>
     </table> 

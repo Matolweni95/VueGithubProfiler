@@ -1,15 +1,14 @@
-<template> 
-    <h1>Users</h1>   
-    <div class="container">
-
+<template>   
+  <div class="container">
+    <h1>Users</h1>
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">#id</th>
-        <th scope="col">Profile Image</th>
-        <th scope="col">Username</th>
-        <th scope="col">User Type</th>
-        <th scope="col">Action</th>
+        <th>id</th>
+        <th>Profile Image</th>
+        <th>Username</th>
+        <th>User Type</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody >

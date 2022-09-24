@@ -9,9 +9,13 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
-    "vue": "^3.2.13",
+    "dayjs": "^1.11.5",
+    "vue": "^3.2.39",
     "vue-axios": "^3.4.1",
+    "vue-moment": "^4.1.0",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
@@ -44,8 +48,8 @@
             "Usergists",
             "Userfollowing",
             "Userfollowers",
-            "Userdetails"
-            
+            "Userdetails",
+            "Repodetails"
           ]
         }
       ]

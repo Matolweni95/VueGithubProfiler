@@ -5,6 +5,7 @@ import Userrepos from '../views/Userrepos'
 import Usergists from '../views/Usergists'
 import UserList from '../views/UserList'
 import Userdetails from '../views/Userdetails'
+import Repodetails from '../views/Repodetails'
 
 const routes = [
 
@@ -18,6 +19,12 @@ const routes = [
         path: '/:username/repos',
         name: 'Repos',
         component: Userrepos
+    },
+
+    {
+        path: '/:username/repos/:repo',
+        name: 'RepoInfo',
+        component: Repodetails
     },
 
     {

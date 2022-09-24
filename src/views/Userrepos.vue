@@ -1,25 +1,25 @@
 <template>
-  <h1>Repos</h1>
   <div class="container">
+  <h1>Repos</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">id</th>
-          <th scope="col">Repo Name</th>
-          <th scope="col">Updated At</th>
-          <th scope="col">Issues</th>
-          <th scope="col">Forks#</th>
-          <th scope="col">View</th>
+          <th>id</th>
+          <th>Repo Name</th>
+          <th>Updated At</th>
+          <th>Issues</th>
+          <th>Forks#</th>
+          <th>View</th>
         </tr>
         </thead>
         <tbody >
           <tr v-for="items in repos" :key="items.id">
             <td>{{items.id}}</td>
             <td>{{items.name}}</td>
-            <td>{{items.updated_at}}</td>
+            <td>{{ formatDate(`${items.updated_at}`) }}</td>
             <td>{{items.open_issues}}</td>
             <td>{{items.forks}}</td>
-            <td><button>Go to Repo</button></td>
+            <td><router-link :to="`/${items.owner.login}/repos/${items.name}`"><button>Go to Repo</button></router-link></td>
           </tr>
         </tbody>
     </table>
@@ -35,6 +35,7 @@
 <script>
 
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 export default {
 name: "userList",
@@ -58,6 +59,12 @@ methods: {
     this.repos = this.Nextpage;
     console.log(this.Nextpage);
     });
+  },
+
+  formatDate(dateString) {
+    const date = dayjs(dateString);
+    // Then specify how you want your dates to be formatted
+    return date.format('MMM D, YYYY h:mm A');
   },
 
   Back(){
