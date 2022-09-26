@@ -42,7 +42,7 @@
 import axios from 'axios';
 
 export default {
-name: "userList",
+name: "userDetails",
 data(){
     return {
         username: this.$route.params.username,
@@ -57,7 +57,6 @@ created: function(){
     .then((res) => {
     this.user_details = res.data;
     this.detailArray.push(this.user_details)
-    console.log(this.detailArray);
     });
   }
 

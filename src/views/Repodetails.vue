@@ -1,6 +1,6 @@
 <template>
    <div class="container">
-    <h1>repodetails</h1>
+    <h1>Repo Details</h1>
     <table class="table">
       <thead>
         <tr>
@@ -35,7 +35,7 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 
 export default {
-name: "userList",
+name: "repoDetails",
 data(){
     return {
         username: this.$route.params.username,
@@ -49,17 +49,16 @@ data(){
 methods: {
   formatDate(dateString) {
   const date = dayjs(dateString);
-  // Then specify how you want your dates to be formatted
   return date.format('MMM D, YYYY h:mm A');
   }
 },
+
 
 created: function(){
   axios.get('https://api.github.com/repos/' +this.username+ '/' + this.repo)
     .then((res) => {
     this.repodetails = res.data;
     this.details.push(this.repodetails);
-    console.log(this.details);
     });
   }
 

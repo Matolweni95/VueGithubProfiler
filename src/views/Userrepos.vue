@@ -38,7 +38,7 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 
 export default {
-name: "userList",
+name: "userRepos",
 data(){
     return {
         username: this.$route.params.username,
@@ -52,18 +52,15 @@ methods: {
 
   Next() {
     this.page++;
-    console.log(this.page)
-    axios.get('https://api.github.com/users/' + this.username + '/repos?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/repos?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.Nextpage = res.data;
     this.repos = this.Nextpage;
-    console.log(this.Nextpage);
     });
   },
 
   formatDate(dateString) {
     const date = dayjs(dateString);
-    // Then specify how you want your dates to be formatted
     return date.format('MMM D, YYYY h:mm A');
   },
 
@@ -73,22 +70,19 @@ methods: {
       this.page = 1;
     }
     
-    axios.get('https://api.github.com/users/' + this.username + '/repos?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/repos?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.Nextpage = res.data;
     this.repos = this.Nextpage;
-    console.log(this.Nextpage);
     });
-    console.log(this.page)
   }
 },
 
 
 created: function(){
-   axios.get('https://api.github.com/users/' + this.username + '/repos?q=test&page=' + this.page + '&per_page=10')
+   axios.get('https://api.github.com/users/' + this.username + '/repos?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.repos = res.data;
-    console.log(this.repos);
     });
   }
 

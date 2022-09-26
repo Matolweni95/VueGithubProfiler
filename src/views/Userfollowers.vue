@@ -8,7 +8,7 @@
           <th>Username</th>
           <th>Profile Image</th>
           <th>type</th>
-          <th>Url</th>
+          <th>Github</th>
         </tr>
       </thead>
       <tbody >
@@ -35,13 +35,13 @@
 import axios from 'axios';
 
 export default {
-name: "userList",
+name: "userFollowers",
 data(){
     return {
-        username: this.$route.params.username,
-        followers:null,
-        page: 1,
-        Nextpage:null,
+      username: this.$route.params.username,
+      followers:null,
+      page: 1,
+      Nextpage:null,
     };
 },
 
@@ -50,37 +50,34 @@ methods: {
 
   Next() {
     this.page++;
-    console.log(this.page)
-    axios.get('https://api.github.com/users/' + this.username + '/followers?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/followers?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.Nextpage = res.data;
     this.followers = this.Nextpage;
-    console.log(this.Nextpage);
     });
   },
 
   Back(){
     this.page--;
+
+    //prevent the page numbers from going bellow 1
+
     if (this.page <= 0){
       this.page = 1;
     }
-    
-    axios.get('https://api.github.com/users/' + this.username + '/followers?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/followers?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.Nextpage = res.data;
     this.followers = this.Nextpage;
-    console.log(this.Nextpage);
     });
-    console.log(this.page)
   }
 },
 
 
 created: function(){
-   axios.get('https://api.github.com/users/' + this.username + '/followers?q=test&page=' + this.page + '&per_page=10')
+   axios.get('https://api.github.com/users/' + this.username + '/followers?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.followers = res.data;
-    console.log(this.followers);
     });
   }
 

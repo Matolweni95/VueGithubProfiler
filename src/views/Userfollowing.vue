@@ -8,7 +8,7 @@
           <th>Username</th>
           <th>Profile Image</th>
           <th>Type</th>
-          <th>Url</th>
+          <th>Github</th>
         </tr>
         </thead>
         <tbody >
@@ -35,7 +35,7 @@
 import axios from 'axios';
 
 export default {
-name: "userList",
+name: "userFollowing",
 data(){
     return {
         username: this.$route.params.username,
@@ -50,12 +50,10 @@ methods: {
 
   Next() {
     this.page++;
-    console.log(this.page)
-    axios.get('https://api.github.com/users/' + this.username + '/following?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/following?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.Nextpage = res.data;
     this.following = this.Nextpage;
-    console.log(this.Nextpage);
     });
   },
 
@@ -65,21 +63,18 @@ methods: {
       this.page = 1;
     }
     
-    axios.get('https://api.github.com/users/' + this.username + '/following?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/following?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.Nextpage = res.data;
     this.following = this.Nextpage;
-    console.log(this.Nextpage);
     });
-    console.log(this.page)
   }
 },
 
 created: function(){
-    axios.get('https://api.github.com/users/' + this.username + '/following?q=test&page=' + this.page + '&per_page=10')
+    axios.get('https://api.github.com/users/' + this.username + '/following?&page=' + this.page + '&per_page=10')
     .then((res) => {
     this.following = res.data;
-    console.log(this.following);
     });
   }
 

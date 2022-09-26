@@ -1,6 +1,14 @@
 <template>   
   <div class="container">
     <h1>Users</h1>
+    <form>
+    <div class="search" appearance="fill">
+      <input v-model="message" placeholder="Enter Unsername" />
+      <button @click.prevent = "Usersearch(message)">
+        click me
+      </button>        
+    </div>
+    </form>
     <table class="table">
       <thead>
       <tr>
@@ -24,8 +32,8 @@
   </table>  
 
   <div class="btns">
-        <button>Next</button>
-        <button>Previous</button>
+    <button @click = "Next()">Next</button>
+    <button @click = "Back()">Previous</button>
   </div> 
 
 </div>
@@ -35,30 +43,93 @@
 <script>
 
 import axios from 'axios';
+import router from '../router'
 
 export default {
 name: "userList",
 data(){
     return {
-        users:null,
-    };
+    users:null,
+    search:null,
+    message: '',
+    page: 1,
+    Nextpage:null,
+  };
+},
+    
+methods: {
+  Usersearch(value){
+
+  if(value === ''){
+    alert('Please enter a valid username')
+  } else {
+  axios.get('https://api.github.com/users/' + value)
+  .then((res) => {
+  this.search = res.data.login
+  router.push('/'+ this.search)
+  }).catch(error => {
+    alert('User does not exist, please try valid username' || error.response.data.message)      
+  });
+
+  }
+},
+
+
+Next(){
+  this.page++;
+    axios.get('https://api.github.com/search/users?q=test&page=' + this.page +'&per_page=10')
+    .then((res) => {
+    this.Nextpage = res.data.items;
+    this.users = this.Nextpage;
+  });
+},
+
+
+Back(){
+    this.page--;
+    if (this.page <= 0){
+      this.page = 1;
+    }
+    axios.get('https://api.github.com/search/users?q=test&page=' + this.page + '&per_page=10')
+    .then((res) => {
+    this.Nextpage = res.data.items;
+    this.users = this.Nextpage;
+  });
+
+}
+
 },
 
 created: function(){
     axios.get('https://api.github.com/search/users?q=test&page=1&per_page=10')
     .then((res) => {
     this.users = res.data.items
-    console.log(this.users);
     });
   }
 
 };
+
 </script>
 
 <style>
 
 img {
-    width:100px;
-    border-radius: 50%;
+  width:100px;
+  border-radius: 50%;
 }
+
+.search {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  width: 400px;
+}
+
+:placeholder-shown{
+  font-size: 18px;
+  text-align: center;
+}
+
 </style>
