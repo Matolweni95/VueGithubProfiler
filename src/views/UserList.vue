@@ -5,7 +5,7 @@
     <div class="search" appearance="fill">
       <input v-model="message" placeholder="Enter Unsername" />
       <button @click.prevent = "Usersearch(message)">
-        click me
+        Search
       </button>        
     </div>
     </form>
