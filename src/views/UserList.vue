@@ -3,7 +3,7 @@
     <h1>Users</h1>
     <form>
     <div class="search" appearance="fill">
-      <input v-model="message" placeholder="Enter Unsername" />
+      <input v-model="message" placeholder="Enter Username" />
       <button @click.prevent = "Usersearch(message)">
         Search
       </button>        
